@@ -48,7 +48,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 
 	public function test_default_output()
 	{
-		$email = 'my@email.com';
+
 
 		$image = $this->gravatar->make($email);
 
