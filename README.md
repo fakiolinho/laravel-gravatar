@@ -1,5 +1,4 @@
 # Laravel Gravatar #
-------
 Laravel Gravatar is a very easy way to call gravatars with fallback images quite fast and efficiently.
 
 ## Installation ##
