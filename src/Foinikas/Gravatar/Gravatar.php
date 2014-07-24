@@ -36,9 +36,9 @@ class Gravatar {
 	 * @param  bool    $secure Select secure or not gravatar image
 	 * @return string          Gravatar image url
 	 */
-	public function make($email, $attrs = [], $s = 50, $d = 'mm', $r = 'g', $secure = false)
+	public function make($email, $attrs = [], $size = 50, $default = 'mm', $r = 'g', $secure = false)
 	{
-		return $this->gravatarize("{$this->callUrl($secure)}{$this->hash($email)}?s={$s}&d={$this->filter($d)}", $attrs);
+		return $this->gravatarize("{$this->callUrl($secure)}{$this->hash($email)}?s={$size}&d={$this->filter($default)}", $attrs);
 	}
 
 	/**
