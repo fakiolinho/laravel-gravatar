@@ -61,9 +61,9 @@ class Gravatar {
 	 */
 	protected function gravatarize($url, array $attrs)
 	{
-		$parsed = $attrs ? $this->fixAttrs($attrs) : null;
+		$parsed = $attrs ? $this->fixAttrs($attrs) : '';
 
-		return '<img src="'.$url.'" '.$parsed.' />';
+		return '<img src="'.$url.'"'.$parsed.'/>';
 	}
 
 	/**
@@ -76,9 +76,9 @@ class Gravatar {
 	{
 		$parsed = '';
 
-		foreach ($attrs as $key => $value)
+		foreach ( $attrs as $key => $value )
 		{
-			$parsed .= "{$key}='{$value}' ";
+			$parsed .= " {$key}='{$value}'";
 		}
 
 		return $parsed;
