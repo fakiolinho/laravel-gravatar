@@ -1,5 +1,5 @@
 # Laravel Gravatar #
-[![Build Status](https://travis-ci.org/fakiolinho/laravel-gravatar.svg?branch=master)](https://travis-ci.org/fakiolinho/laravel-gravatar)
+[http://img.shields.io/travis/joyent/node/v0.6.svg](https://travis-ci.org/fakiolinho/laravel-gravatar) [http://img.shields.io/npm/l/express.svg](http://opensource.org/licenses/MIT)
 
 Laravel Gravatar is a very easy way to call gravatars with fallback images quite fast and efficiently while using Laravel 4 framework.
 
@@ -88,5 +88,9 @@ Default value: 'g'
 If you're displaying Gravatars on a page that is being served over SSL, then you'll want to serve your Gravatars via SSL as well. To achieve this just set this to true.
 
 Default value: false
+
+## License ##
+
+All code created by foinikas is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 For more information about the default options Gravatar's API provides visit [Gravatar](http://el.gravatar.com/site/implement/)
