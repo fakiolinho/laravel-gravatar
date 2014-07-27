@@ -18,7 +18,7 @@ Once this operation completes, the final step is to add the service provider. Op
 
     'Foinikas\Gravatar\GravatarServiceProvider'
     
-Do not worry about registering any Facade as it will register automatically a new Facade named `Gravatar`.
+Do not worry about registering any Facade as it will register automatically a new Facade named `Gravatar` for you.
     
 ## Use Gravatar ##
 
