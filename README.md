@@ -35,7 +35,7 @@ That's it. Your gravatar was created!
 ## Parameters ##
 Gravatar's `image` method can accept quite a few options:
 
-    Gravatar::image($email, $attrs = [], $size = 50, $default = null, $r = 'g', $secure = false);
+    Gravatar::image($email, array $attrs = null, $size = 50, $default = null, $r = 'g', $secure = false);
 
 Gravatar's `url` method can accept almost the same except for the `$attrs` array:
 
