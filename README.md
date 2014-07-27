@@ -48,7 +48,7 @@ Attributes for the created img tag. Usage:
 
     ['class' => 'myClass', 'id' => 'myId'];
 
-Default value: []
+Default value: null
 
 ### size ###
 
