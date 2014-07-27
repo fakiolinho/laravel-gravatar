@@ -1,5 +1,6 @@
 # Laravel Gravatar #
 Laravel Gravatar is a very easy way to call gravatars with fallback images quite fast and efficiently while using Laravel 4 framework.
+[![Build Status](https://travis-ci.org/fakiolinho/laravel-gravatar.svg?branch=master)](https://travis-ci.org/fakiolinho/laravel-gravatar)
 
 ## Installation ##
 Begin by installing this package through Composer. Edit your project's composer.json file to require foinikas/gravatar.
