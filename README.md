@@ -20,17 +20,21 @@ Do not worry about registering any Facade as it will register automatically a ne
     
 ## Use Gravatar ##
 
-Ready to call your first gravatar? Ok just make it:
+Ready to call your first gravatar? Ok just create a gravatar image:
 
-    Gravatar::make('my@email.com');
+    Gravatar::image('my@email.com');
+
+or maybe just a gravatar url is ok:
+
+    Gravatar::url('my@email.com');
     
 That's it. Your gravatar was created!
 
 ## Parameters ##
 
-Gravatar's `make` method can accept quite a few options:
+Gravatar's `image` method can accept quite a few options:
 
-    Gravatar::make($email, $attrs = [], $size = 50, $default = 'mm', $r = 'g', $secure = false);
+    Gravatar::image($email, $attrs = [], $size = 50, $default = 'mm', $r = 'g', $secure = false);
 
 ### email ###
 User's email address.
@@ -54,17 +58,17 @@ Default value: 50
 
 ### default ###
 
-This is the fallback image in case there is not a valid gravatar for the provided email address. This can be one of the default options Gravatar's api provides:
+This is the fallback image in case there is not a valid gravatar for the provided email address. This can be either the default Gravatar logo if default parameter is left blank or can be one of the many options Gravatar's api provides:
 
     '404', 'mm', 'identicon', 'monsterrid', 'wavatar', 'retro', 'blank'
     
-or maybe a custom image's url you could provide:
+or also it could be a custom image's url you may choose to provide:
 
     'img/myimage.jpg'
     
 In case you provide a custom image then the package shall create a full path to it using Laravel's `URL::asset()` method.
 
-Default value: 'mm'
+Default value: null (Gravatar logo)
 
 ### rating ###
 
@@ -79,5 +83,9 @@ Default value: 'g'
 If you're displaying Gravatars on a page that is being served over SSL, then you'll want to serve your Gravatars via SSL as well. To achieve this just set this to true.
 
 Default value: false
+
+Gravatar's `url` method can accept almost the same except for the `$attrs` array:
+
+    Gravatar::url($email, $size = 50, $default = 'mm', $r = 'g', $secure = false);
 
 For more information about the default options Gravatar's API provides visit [Gravatar](http://el.gravatar.com/site/implement/)

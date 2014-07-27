@@ -23,22 +23,36 @@ class Gravatar {
 	 * Gravatar's Default images options
 	 * @var array
 	 */
-	protected $defaults = ['404', 'mm', 'identicon', 'monsterrid', 'wavatar', 'retro', 'blank'];
+	protected $defaults = ['404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro', 'blank'];
 
 	/**
 	 * Create a gravatar url
 	 * 
 	 * @param  string  $email  User's email address
-	 * @param  array   $attrs  Attributes for the gravatar img
 	 * @param  integer $s      Gravatar size
 	 * @param  string  $d      Gravatar default option
 	 * @param  string  $r      Gravatar rating
-	 * @param  bool    $secure Select secure or not gravatar image
+	 * @param  bool    $secure Select secure or not gravatar image url
 	 * @return string          Gravatar image url
 	 */
-	public function make($email, $attrs = [], $size = 50, $default = 'mm', $r = 'g', $secure = false)
+	public function url($email, $size = 50, $default = null, $r = 'g', $secure = false)
 	{
-		return $this->gravatarize("{$this->callUrl($secure)}{$this->hash($email)}?s={$size}&d={$this->filter($default)}", $attrs);
+		return "{$this->callUrl($secure)}{$this->hash($email)}?s={$size}&d={$this->filterDefaults($default)}&r={$r}";
+	}
+	/**
+	 * Create a gravatar image
+	 * 
+	 * @param  string  $email  User's email address
+	 * @param  array   $attrs  Attributes for the gravatar image
+	 * @param  integer $s      Gravatar size
+	 * @param  string  $d      Gravatar default option
+	 * @param  string  $r      Gravatar rating
+	 * @param  bool    $secure Select secure or not gravatar image url
+	 * @return string          Gravatar image
+	 */
+	public function image($email, array $attrs = null, $size = 50, $default = null, $r = 'g', $secure = false)
+	{
+		return $this->passAttrs($this->url($email, $size, $default, $r, $secure), $attrs);
 	}
 
 	/**
@@ -59,7 +73,7 @@ class Gravatar {
 	 * @param  array $attrs Image's attributes
 	 * @return string        Image element
 	 */
-	protected function gravatarize($url, array $attrs)
+	protected function passAttrs($url, $attrs)
 	{
 		$parsed = $attrs ? $this->fixAttrs($attrs) : '';
 
@@ -92,7 +106,7 @@ class Gravatar {
 	 */
 	protected function hash($email)
 	{
-		return md5( strtolower( trim( $this->check($email) ) ) );
+		return md5(strtolower(trim($this->filterEmail($email))));
 	}
 
 	/**
@@ -101,11 +115,11 @@ class Gravatar {
 	 * @param  string $email User's email
 	 * @return string        User's email
 	 */
-	protected function check($email)
+	protected function filterEmail($email)
 	{
-		if( filter_var($email, FILTER_VALIDATE_EMAIL) === false )
+		if (filter_var($email, FILTER_VALIDATE_EMAIL) === false)
 		{
-			throw new Exception("Gravatar failure: {$email} is not a valid email address");			
+			throw new Exception("Gravatar failure: {$email} is not a valid email address");
 		}
 
 		return $email;
@@ -117,13 +131,27 @@ class Gravatar {
 	 * @param  string $default Default image
 	 * @return string          Default image
 	 */
-	public function filter($default)
+	protected function filterDefaults($default)
 	{
-		if ( ! in_array($default, $this->defaults) )
+		if (in_array($default, $this->defaults) or is_null($default))
 		{
-			return URL::asset($default);
+			return $default;
 		}
 
-		return $default;
+		return URL::asset($default);
+	}
+
+	protected function filterImages($image)
+	{
+		$parts = pathinfo($image);
+
+		$ext = $parts['extension'];
+
+		if ( ! is_null($ext) or in_array($ext, ['jpg', 'jpeg', 'png', 'gif']))
+		{
+			return $image;			
+		}
+
+		throw new Exception("Gravatar failure: {$image} is not a valid image");
 	}
 }

@@ -6,6 +6,10 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 
 	protected $gravatar;
 
+	protected $valid_email = 'my@email.com';
+
+	protected $invalid_email = 'myemail.com';
+
 	public function setup()
 	{
 		$this->gravatar = new Gravatar();
@@ -13,11 +17,11 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 
 	public function test_it_validates_invalid_emails()
 	{
-		$email = 'myemail.com';
+		$email = $this->invalid_email;
 
 		try
 		{
-			$image = $this->gravatar->make($email);
+			$image = $this->gravatar->url($this->invalid_email);
 		}
 		catch (Exception $e)
 		{
@@ -29,30 +33,48 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 
 	public function test_it_works_for_valid_emails()
 	{
-		$email = 'my@email.com';
+		$email = $this->valid_email;
 
-		$image = $this->gravatar->make($email);
+		$image = $this->gravatar->image($email);
 		
 		$this->assertContains($this->hash($email), $image);
 	}
 
 	public function test_attributes_parse()
 	{
-		$email = 'my@email.com';
+		$email = $this->valid_email;
 
-		$image = $this->gravatar->make($email, ['id' => 'faki', 'class' => 'myClass']);
+		$image = $this->gravatar->image($email, ['id' => 'faki', 'class' => 'myClass']);
 		
 		$this->assertContains("id='faki'", $image);
 		$this->assertContains("class='myClass'", $image);
 	}
 
-	public function test_default_output()
+	public function test_default_url_output()
 	{
-		$email = 'my@email.com';
+		$email = $this->valid_email;
 
-		$image = $this->gravatar->make($email);
+		$url = $this->gravatar->url($email);
 
-		$this->assertEquals('<img src="http://www.gravatar.com/avatar/4f384e9f3e8e625aae72b52658323d70?s=50&d=mm"/>', $image);
+		$this->assertEquals('http://www.gravatar.com/avatar/4f384e9f3e8e625aae72b52658323d70?s=50&d=&r=g', $url);
+	}
+
+	public function test_default_image_output()
+	{
+		$email = $this->valid_email;
+
+		$image = $this->gravatar->image($email);
+
+		$this->assertEquals('<img src="http://www.gravatar.com/avatar/4f384e9f3e8e625aae72b52658323d70?s=50&d=&r=g"/>', $image);
+	}
+
+	public function test_secure_url_output()
+	{
+		$email = $this->valid_email;
+
+		$url = $this->gravatar->url($email, 100, 'wavatar', 'r', true);
+
+		$this->assertEquals('https://www.gravatar.com/avatar/4f384e9f3e8e625aae72b52658323d70?s=100&d=wavatar&r=r', $url);
 	}
 
 	protected function hash($email)
