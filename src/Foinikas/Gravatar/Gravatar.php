@@ -138,20 +138,25 @@ class Gravatar {
 			return $default;
 		}
 
-		return URL::asset($default);
+		return URL::asset($this->filterImages($default));
 	}
 
+	/**
+	 * Filter for invalid images
+	 * @param  string $image Custom image's path
+	 * @return string        Custom image's path
+	 */
 	protected function filterImages($image)
 	{
 		$parts = pathinfo($image);
 
 		$ext = $parts['extension'];
 
-		if ( ! is_null($ext) or in_array($ext, ['jpg', 'jpeg', 'png', 'gif']))
+		if (is_null($ext) or ! in_array($ext, ['jpg', 'jpeg', 'png', 'gif']))
 		{
-			return $image;			
+			throw new Exception("Gravatar failure: {$image} is not a valid image");		
 		}
 
-		throw new Exception("Gravatar failure: {$image} is not a valid image");
+		return $image;
 	}
 }
