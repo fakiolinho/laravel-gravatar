@@ -1,5 +1,5 @@
 # Laravel Gravatar #
-[http://img.shields.io/travis/joyent/node/v0.6.svg](https://travis-ci.org/fakiolinho/laravel-gravatar) [http://img.shields.io/npm/l/express.svg](http://opensource.org/licenses/MIT)
+[![Travis CI](http://img.shields.io/travis/joyent/node/v0.6.svg)](https://travis-ci.org/fakiolinho/laravel-gravatar) [![MIT](http://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
 
 Laravel Gravatar is a very easy way to call gravatars with fallback images quite fast and efficiently while using Laravel 4 framework.
 
