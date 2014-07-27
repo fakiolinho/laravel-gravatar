@@ -33,10 +33,13 @@ or maybe just a gravatar url is ok:
 That's it. Your gravatar was created!
 
 ## Parameters ##
-
 Gravatar's `image` method can accept quite a few options:
 
-    Gravatar::image($email, $attrs = [], $size = 50, $default = 'mm', $r = 'g', $secure = false);
+    Gravatar::image($email, $attrs = [], $size = 50, $default = null, $r = 'g', $secure = false);
+
+Gravatar's `url` method can accept almost the same except for the `$attrs` array:
+
+    Gravatar::url($email, $size = 50, $default = null, $r = 'g', $secure = false);
 
 ### email ###
 User's email address.
@@ -85,9 +88,5 @@ Default value: 'g'
 If you're displaying Gravatars on a page that is being served over SSL, then you'll want to serve your Gravatars via SSL as well. To achieve this just set this to true.
 
 Default value: false
-
-Gravatar's `url` method can accept almost the same except for the `$attrs` array:
-
-    Gravatar::url($email, $size = 50, $default = 'mm', $r = 'g', $secure = false);
 
 For more information about the default options Gravatar's API provides visit [Gravatar](http://el.gravatar.com/site/implement/)
