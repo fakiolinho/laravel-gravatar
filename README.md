@@ -22,6 +22,11 @@ Do not worry about registering any Facade as it will register automatically a ne
     
 ## Use Gravatar ##
 
+Provided methods:
+- Gravatar::image('my@email.com');
+- Gravatar::url('my@email.com');
+- Gravatar::hash('my@email.com');
+
 Ready to call your first gravatar? Ok just create a gravatar image:
 
     Gravatar::image('my@email.com');
@@ -29,8 +34,14 @@ Ready to call your first gravatar? Ok just create a gravatar image:
 or maybe just a gravatar url is ok:
 
     Gravatar::url('my@email.com');
-    
+
 That's it. Your gravatar was created!
+
+In case you need only the hashed email address of yours:
+
+    Gravatar::hash('my@email.com');
+
+Easy enough right?
 
 ## Parameters ##
 Gravatar's `image` method can accept quite a few options:
@@ -40,6 +51,10 @@ Gravatar's `image` method can accept quite a few options:
 Gravatar's `url` method can accept almost the same except for the `$attrs` array:
 
     Gravatar::url($email, $size = 50, $default = null, $r = 'g', $secure = false);
+
+Gravatar's `hash` method accepts only the email address as a parameter:
+
+    Gravatar::hash($email);
 
 ### email ###
 User's email address.

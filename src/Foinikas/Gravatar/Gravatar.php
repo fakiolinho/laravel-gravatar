@@ -21,6 +21,7 @@ class Gravatar {
 
 	/**
 	 * Gravatar's Default images options
+	 * 
 	 * @var array
 	 */
 	protected $defaults = ['404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro', 'blank'];
@@ -50,9 +51,20 @@ class Gravatar {
 	 * @param  bool    $secure Select secure or not gravatar image url
 	 * @return string          Gravatar image
 	 */
-	public function image($email, array $attrs = null, $size = 50, $default = null, $r = 'g', $secure = false)
+	public function image($email, $attrs = [], $size = 50, $default = null, $r = 'g', $secure = false)
 	{
 		return $this->passAttrs($this->url($email, $size, $default, $r, $secure), $attrs);
+	}
+
+	/**
+	 * Hash user's email for before gravatar request
+	 * 
+	 * @param  string $email User's email
+	 * @return string        Hashed user's email
+	 */
+	public function hash($email)
+	{
+		return md5(strtolower(trim($this->filterEmail($email))));
 	}
 
 	/**
@@ -75,7 +87,7 @@ class Gravatar {
 	 */
 	protected function passAttrs($url, $attrs)
 	{
-		$parsed = $attrs ? $this->fixAttrs($attrs) : '';
+		$parsed = $attrs ? $this->fixAttrs($attrs) : null;
 
 		return '<img src="'.$url.'"'.$parsed.'/>';
 	}
@@ -86,7 +98,7 @@ class Gravatar {
 	 * @param  array  $attrs Image's attributes
 	 * @return string Image's attributes string
 	 */
-	protected function fixAttrs(array $attrs)
+	protected function fixAttrs($attrs)
 	{
 		$parsed = '';
 
@@ -96,17 +108,6 @@ class Gravatar {
 		}
 
 		return $parsed;
-	}
-
-	/**
-	 * Hash user's email for before gravatar request
-	 * 
-	 * @param  string $email User's email
-	 * @return string        Hashed user's email
-	 */
-	protected function hash($email)
-	{
-		return md5(strtolower(trim($this->filterEmail($email))));
 	}
 
 	/**
@@ -143,6 +144,7 @@ class Gravatar {
 
 	/**
 	 * Filter for invalid images
+	 * 
 	 * @param  string $image Custom image's path
 	 * @return string        Custom image's path
 	 */
@@ -150,7 +152,7 @@ class Gravatar {
 	{
 		$parts = pathinfo($image);
 
-		$ext = $parts['extension'];
+		$ext = strtolower($parts['extension']);
 
 		if (is_null($ext) or ! in_array($ext, ['jpg', 'jpeg', 'png', 'gif']))
 		{

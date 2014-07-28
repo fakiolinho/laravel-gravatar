@@ -25,8 +25,6 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 		}
 		catch (Exception $e)
 		{
-			$message = $e->getMessage();
-
 			$this->assertEquals("Gravatar failure: {$email} is not a valid email address", $e->getMessage());			
 		}
 	}
@@ -37,7 +35,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 
 		$image = $this->gravatar->image($email);
 		
-		$this->assertContains($this->hash($email), $image);
+		$this->assertContains($this->gravatar->hash($email), $image);
 	}
 
 	public function test_attributes_parse()
@@ -47,6 +45,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 		$image = $this->gravatar->image($email, ['id' => 'faki', 'class' => 'myClass']);
 		
 		$this->assertContains("id='faki'", $image);
+
 		$this->assertContains("class='myClass'", $image);
 	}
 
@@ -68,6 +67,15 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('<img src="http://www.gravatar.com/avatar/4f384e9f3e8e625aae72b52658323d70?s=50&d=&r=g"/>', $image);
 	}
 
+	public function test_default_hash_output()
+	{
+		$email = $this->valid_email;
+
+		$hash = $this->gravatar->hash($email);
+
+		$this->assertEquals(md5(strtolower(trim($email))), $hash);
+	}
+
 	public function test_secure_url_output()
 	{
 		$email = $this->valid_email;
@@ -76,10 +84,4 @@ class GravatarTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals('https://www.gravatar.com/avatar/4f384e9f3e8e625aae72b52658323d70?s=100&d=wavatar&r=r', $url);
 	}
-
-	protected function hash($email)
-	{
-		return md5(strtolower(trim($email)));
-	}
-
 }
