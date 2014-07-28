@@ -1,6 +1,6 @@
 {
     "name": "foinikas/gravatar",
-    "description": "A very easy way to call gravatars with fallback images.",
+    "description": "A fast way to create Gravatars using Laravel framework",
     "license": "MIT",
     "authors": [
         {
