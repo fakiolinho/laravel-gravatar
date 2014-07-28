@@ -65,7 +65,7 @@ Default value: 50
 
 This is the fallback image in case there is not a valid gravatar for the provided email address. This can be either the default Gravatar logo if default parameter is left blank or can be one of the many options Gravatar's api provides:
 
-    '404', 'mm', 'identicon', 'monsterrid', 'wavatar', 'retro', 'blank'
+    '404', 'mm', 'identicon', 'monsterid', 'wavatar', 'retro', 'blank'
     
 or also it could be a custom image's url you may choose to provide:
 
