@@ -1,11 +1,14 @@
 {
     "name": "foinikas/gravatar",
     "description": "A fast way to create Gravatars using Laravel framework",
+    "keywords": ["laravel", "gravatar"],
+    "time": "2014-07-28",
     "license": "MIT",
     "authors": [
         {
             "name": "Foinikas",
-            "email": "info@marios-development.com"
+            "email": "info@marios-development.com",
+            "homepage": "http://www.marios-development.com"
         }
     ],
     "require": {
